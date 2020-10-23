@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
 firewalld:
   package:
     name: firewalld
@@ -5,17 +8,10 @@ firewalld:
   service: firewalld
   config: /etc/firewalld.conf
   default_zone: public
-  prune_block_icmp: True
-  prune_interfaces: True
-  prune_services: True
-  prune_port_fwd: False
-  prune_ports: False
-  prune_rich_rules: False
-  prune_sources: False
 
   predefined_services:
     - ssh
-    - dhcp6-client
+    - dhcpv6-client
   custom_services:
       ports:
       - 4505/tcp

@@ -35,7 +35,6 @@ start_firewalld_service:
 {% else %}
 
 skip_firewalld_installation:
-  #test.fail_without_changes:
   test.show_notification:
     - text: |
         "firewalld not supported on {{ OSFAMILY }}-{{ OSVERSION }}"
