@@ -5,13 +5,13 @@
 
 configure_sshd_service:
   file.managed:
-    - name: {{ sshd_settings.config.filenam }}
+    - name: {{ sshd_settings.config.filename }}
     - source: {{ sshd_settings.config.source }}
     - template: jinja
 
 start_sshd_service:
   service.running:
-    - name: sshd
-    - enable: true
+    - name: {{ sshd_settings.service.name }}
+    - enable: {{ sshd_settings.service.enable }}
     - watch:
       - file: configure_sshd_service
