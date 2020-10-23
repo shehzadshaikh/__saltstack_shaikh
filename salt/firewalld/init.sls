@@ -9,8 +9,8 @@
 
 {% if OSFAMILY == "RedHat" and OSVERSION == 7 %}
 include:
-  - {{ slspath }}/config
-  - {{ slspath }}/services
+  - firewalld/config
+  - firewalld/services
 
 {# Disable iptables service that comes with rhel/centos #}
 disable_iptables_service:

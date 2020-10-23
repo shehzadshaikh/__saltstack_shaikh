@@ -3,7 +3,7 @@
 # This state configures firewalld.
 #
 
-{% from "firewalld/map.jinja" import firewalld with context %}
+{% from "firewalld/map.jinja" import firewalld_settings with context %}
 
 firewalld_config_directory:
   file.directory:            # make sure this is a directory
@@ -16,11 +16,11 @@ firewalld_config_directory:
 
 configure_firewalld_service:
   file.managed:
-    - name: /etc/firewalld/firewalld.conf
+    - name: {{ firewalld_settings.config.filename }}
     - user: root
     - group: root
     - mode: 644
-    - source: salt://firewalld/files/firewalld.conf
+    - source: {{ firewalld_settings.config.source }}
     - template: jinja
     - require:
       - pkg: install_firewalld_service 	# make sure package is installed

@@ -8,7 +8,9 @@ firewalld:
   service: 
     name: firewalld
     enable: true
-  config: /etc/firewalld.conf
+  config: 
+    filename: /etc/firewalld/firewalld.conf
+    source: salt://firewalld/files/firewalld.conf
   default_zone: public
 
   predefined_services:
