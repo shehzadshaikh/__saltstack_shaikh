@@ -14,7 +14,7 @@ firewalld_config_directory:
     - require:
       - pkg: package_firewalld # make sure package is installed
 
-install_firewalld_service:
+configure_firewalld_service:
   file.managed:
     - name: /etc/firewalld/firewalld.conf
     - user: root
