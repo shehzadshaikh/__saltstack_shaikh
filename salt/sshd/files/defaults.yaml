@@ -5,8 +5,9 @@ sshd:
   config:
     filename: /etc/ssh/sshd_config
     source: salt://sshd/templates/sshd_config
-  package:
+  service:
     name: sshd
+    enable: true
   allowagentforwarding: "yes"
   allowx11forwarding: "yes"
   allowstreamlocalforwarding: "yes"

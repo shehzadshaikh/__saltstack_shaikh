@@ -3,7 +3,7 @@
 
 {% from "sshd/map.jinja" import sshd_settings with context %}
 
-configure_sshd_file:
+configure_sshd_service:
   file.managed:
     - name: {{ sshd_settings.config.filenam }}
     - source: {{ sshd_settings.config.source }}
@@ -11,7 +11,7 @@ configure_sshd_file:
 
 start_sshd_service:
   service.running:
-    - name: {{ sshd_settings.service.name }}
-    - enable: {{ sshd_settings.service.enable }}
+    - name: sshd
+    - enable: true
     - watch:
-      - file: configure_sshd_file
+      - file: configure_sshd_service
