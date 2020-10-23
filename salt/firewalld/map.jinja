@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{% import_yaml "firewalld/files/defaults.yaml" as defaults %}
+
+{% set firewalld_settings = salt['pillar.get']('firewalld:lookup', default=defaults.firewalld, merge=True) %}

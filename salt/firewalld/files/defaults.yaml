@@ -1,0 +1,24 @@
+firewalld:
+  package:
+    name: firewalld
+    version: '0.6.3'
+  service: firewalld
+  config: /etc/firewalld.conf
+  default_zone: public
+  prune_block_icmp: True
+  prune_interfaces: True
+  prune_services: True
+  prune_port_fwd: False
+  prune_ports: False
+  prune_rich_rules: False
+  prune_sources: False
+
+  predefined_services:
+    - ssh
+    - dhcp6-client
+  custom_services:
+      ports:
+      - 4505/tcp
+      - 4506/tcp
+      - 8080/tcp
+      - 8443/tcp

@@ -1,0 +1,15 @@
+ntp:
+  config:
+    filename: /etc/ntp.conf
+    source: salt://ntp/templates/ntp.conf
+    timeservers:
+      - time.server.com		# TODO: update timeserver detail and remove comment
+      - time2.server.com
+      - 10.214.16.13
+      - 10.214.16.14
+  package:
+    name: ntp
+    version:
+  service:
+    name: ntpd
+    enable: true
