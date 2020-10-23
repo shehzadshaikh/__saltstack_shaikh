@@ -34,7 +34,7 @@ start_firewalld_service:
     - enable: {{ firewalld_settings.service.enable }}
     - require:
       - pkg: install_firewalld_service
-      - file: config_firewalld_service
+      - file: configure_firewalld_service
 
 reload_firewalld_service:
   cmd.wait:

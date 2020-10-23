@@ -12,7 +12,7 @@ firewalld_config_directory:
     - group: root
     - mode: 750
     - require:
-      - pkg: package_firewalld # make sure package is installed
+      - pkg: install_firewalld_service # make sure package is installed
 
 configure_firewalld_service:
   file.managed:
