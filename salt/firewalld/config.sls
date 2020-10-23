@@ -28,4 +28,4 @@ configure_firewalld_service:
     - require_in:
       - service: start_firewalld_service
     - watch_in:
-      - cmd: reload_firewalld # reload firewalld config
+      - cmd: reload_firewalld_service # reload firewalld config

@@ -15,3 +15,5 @@ enable_std_firewall:
     {% for port in firewalld_settings.custom_services.ports %}
       - {{ port }}
     {% endfor %}
+    - watch_in:
+      - cmd: reload_firewalld_service # reload firewalld config

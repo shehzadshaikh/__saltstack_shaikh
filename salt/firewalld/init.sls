@@ -35,6 +35,12 @@ start_firewalld_service:
     - require:
       - pkg: install_firewalld_service
       - file: config_firewalld_service
+
+reload_firewalld_service:
+  cmd.wait:
+    - name: 'firewall-cmd --reload'
+    - require:
+      - service: start_firewalld_service
 {% else %}
 
 skip_firewalld_installation:
