@@ -1,8 +1,0 @@
-
-{% import_yaml "ntp/files/defaults.yaml" as defaults %}
-
-
-{% set ntp_settings = defaults.ntp %}
-{#
-{% set ntp_settings = salt['pillar.get']('ntp:lookup', default=defaults.ntp, merge=True) %}
-#}

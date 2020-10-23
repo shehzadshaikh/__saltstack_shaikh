@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
 ntp:
   config:
     filename: /etc/ntp.conf
-    source: salt://ntp/templates/ntp.conf
+    source: salt://ntp/files/ntp.conf
     timeservers:
       - time.server.com		# TODO: update timeserver detail and remove comment
       - time2.server.com

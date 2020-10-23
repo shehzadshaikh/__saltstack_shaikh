@@ -5,7 +5,9 @@ firewalld:
   package:
     name: firewalld
     version: '0.6.3'
-  service: firewalld
+  service: 
+    name: firewalld
+    enable: true
   config: /etc/firewalld.conf
   default_zone: public
 

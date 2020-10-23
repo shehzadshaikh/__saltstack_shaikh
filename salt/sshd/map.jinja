@@ -1,0 +1,13 @@
+# vim: ft=jinja
+
+{# This is a barebones map.jinja file #}
+{# We import default values that are then merged with pillar data #}
+
+{# Imports defaults #}
+{% import_yaml "sshd/files/defaults.yaml" as defaults %}
+
+{# Merge in sshd:lookup pillar #}
+{% set sshd_settings = salt['pillar.get']('sshd', default=defaults.sshd, merge=True) %}
+
+{# Get SSHd custom parameters from grain #}
+{# {% set sshd_grain = salt['grains.get']('custom_grains:sshd', '') %} #}

@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
+sshd:
+  config:
+    filename: /etc/ssh/sshd_config
+    source: salt://sshd/templates/sshd_config
+  package:
+    name: sshd
+  allowagentforwarding: "yes"
+  allowx11forwarding: "yes"
+  allowstreamlocalforwarding: "yes"
+  gssapiauthentication: "no"
+  passwordauthentication: "no"
+  pubkeyauthentication: "yes"
+  challengeresponseauthentication: "yes"
+  clientaliveinterval: 15m
+  clientalivecountmax: 0
+  overrides: []
+  
