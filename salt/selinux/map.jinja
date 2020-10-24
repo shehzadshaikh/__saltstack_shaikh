@@ -5,7 +5,7 @@
 {# We import default values that are then merged with pillar data #}
 
 {# Imports defaults #}
-{% import_yaml "selinux/defaults.yaml" as defaults %}
+{% import_yaml "selinux/files/defaults.yaml" as defaults %}
 
 {# Merge in selinux:lookup pillar #}
 {% set selinux_settings = salt['pillar.get']('selinux:lookup', default=defaults.selinux, merge=True) %}
