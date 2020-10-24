@@ -5,17 +5,17 @@ std_tools:
   packages:
     rhel7:
       - wget
-        unzip
-        expect
-        lsof
-        m4
-        motif
-        nano
-        screen
-        tmux
-        tree
-        telnet
-        nmap-ncat
+      - unzip
+      - expect
+      - lsof
+      - m4
+      - motif
+      - nano
+      - screen
+      - tmux
+      - tree
+      - telnet
+      - nmap-ncat
     rhel6:
       - wget
       - unzip
