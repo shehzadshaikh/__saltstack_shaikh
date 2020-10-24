@@ -10,13 +10,13 @@
 {% if OSVERSION == 7 %}
 {% for pkg in std_tools_settings.packages.rhel7 %}
 install_std_tools_{{ pkg }}:
-  cmd.run:
+  pkg.installed:
     - name: {{ pkg }}
 {% endfor %}
 {% elif OSVERSION == 6 %}
 {% for pkg in std_tools_settings.packages.rhel6 %}
 install_std_tools_{{ pkg }}:
-  cmd.run:
+  pkg.installed:
     - name: {{ pkg }}
 {% endfor %}
 {% endif %}
