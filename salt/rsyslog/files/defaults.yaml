@@ -12,7 +12,7 @@ rsyslog:
 
     configs: 
       filename: /etc/rsyslog.conf
-      source: salt://rsyslog/files/rsyslog.conf.jinja
+      source: salt://rsyslog/files/rsyslog.conf
       workdirectory: /var/spool/rsyslog
       custom_config_path: /etc/rsyslog.d
     
