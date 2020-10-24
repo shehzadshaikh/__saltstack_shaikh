@@ -144,6 +144,6 @@ Subsystem	sftp	/usr/libexec/openssh/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
-{% for override in sshd.overrides %}
+{% for override in sshd_settings.overrides %}
 {{ override.match }}
 {% endfor %}
