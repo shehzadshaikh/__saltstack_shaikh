@@ -5,7 +5,7 @@
 {# We import default values that are then merged with pillar data #}
 
 {# Imports defaults #}
-{% import_yaml "rsyslog/defaults.yaml" as defaults %}
+{% import_yaml "rsyslog/files/defaults.yaml" as defaults %}
 
 {# Merge in rsyslog:lookup pillar #}
 {% set rsyslog_settings = salt['pillar.get']('rsyslog:lookup', default=defaults.rsyslog, merge=True) %}
