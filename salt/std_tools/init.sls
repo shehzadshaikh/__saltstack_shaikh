@@ -8,7 +8,7 @@
 
 {% if OSFAMILY == "RedHat" %}
 install_std_tools:
-  pkg.installed:
+  cmd.run:
   {% if OSVERSION == 7 %}
     {% for pkg in std_tools_settings.packages.rhel7 %}
     - name: {{ pkg }}
