@@ -4,7 +4,7 @@
 sshd:
   config:
     filename: /etc/ssh/sshd_config
-    source: salt://sshd/templates/sshd_config
+    source: salt://sshd/files/sshd_config
   service:
     name: sshd
     enable: true
