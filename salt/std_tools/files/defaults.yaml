@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
+std_tools:
+  packages:
+    rhel-7:
+      - wget
+      - unzip
+      - expect
+      - lsof
+      - m4
+      - motif
+      - nano
+      - screen
+      - tmux
+      - tree
+      - telnet
+      - nmap-ncat
+    rhel-6:
+      - wget
+      - unzip
+      - expect
+      - lsof
+      - m4
+      - motif
+      - nano
+      - tmux
+      - tree
+      - telnet
+      - nc

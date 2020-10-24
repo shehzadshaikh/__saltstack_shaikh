@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{# This is a barebones map.jinja file #}
+{# We import default values that are then merged with pillar data #}
+
+{# Imports defaults #}
+{% import_yaml "std_tools/files/defaults.yaml" as defaults %}
+
+{# Merge in selinux:lookup pillar #}
+{% set std_tools_settings = salt['pillar.get']('std_tools:lookup', default=defaults.std_tools, merge=True) %}
