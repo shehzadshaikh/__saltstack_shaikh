@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
+selinux:
+  mode: permissive
+  type: targeted
+  config:
+    filename: /etc/selinux/config
+    source: salt://selinux/files/config
