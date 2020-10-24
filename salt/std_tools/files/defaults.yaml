@@ -3,7 +3,7 @@
 
 std_tools:
   packages:
-    rhel-7:
+    rhel7:
       - wget
       - unzip
       - expect
@@ -16,7 +16,7 @@ std_tools:
       - tree
       - telnet
       - nmap-ncat
-    rhel-6:
+    rhel6:
       - wget
       - unzip
       - expect
