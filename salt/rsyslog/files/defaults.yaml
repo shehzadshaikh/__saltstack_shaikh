@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
+rsyslog:
+    package: 
+      name: rsyslog
+    service: 
+      name: rsyslog
+      enable: true
+    runuser: root
+    rungroup: root
+
+    configs: 
+      filename: /etc/rsyslog.conf
+      source: salt://rsyslog/files/rsyslog.conf.jinja
+      workdirectory: /var/spool/rsyslog
+      custom_config_path: /etc/rsyslog.d
+    
+    rsyslog_conf:
+      target: plhslskp01.d1.peapod.com
+      usefqdn: True
+      imjournal: True
+      imjournal_parameters:
+        - $imjournalRatelimitInterval 600
+        - $imjournalRatelimitBurst 20000
+    
+    custom_configs:
+      - 50-default.conf
+  

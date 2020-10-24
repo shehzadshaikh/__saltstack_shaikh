@@ -2,7 +2,7 @@
 # vim: ft=sls
 
 selinux:
-  mode: permissive
+  mode: disabled
   type: targeted
   config:
     filename: /etc/selinux/config

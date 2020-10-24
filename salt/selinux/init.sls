@@ -12,7 +12,7 @@ install_selinux_exec_modules:
       - policycoreutils
       - policycoreutils-python
 
-disable_selinux:
+moidfy_selinux_settings:
   selinux.mode:
     - name: {{ selinux_settings.mode }}
     - require:
