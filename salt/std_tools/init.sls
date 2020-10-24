@@ -7,17 +7,19 @@
 {% set OSVERSION = salt['grains.get']("osmajorrelease") %}
 
 {% if OSFAMILY == "RedHat" %}
-install_std_tools:
+{% if OSVERSION == 7 %}
+{% for pkg in std_tools_settings.packages.rhel7 %}
+install_std_tools_{{ pkg }}:
   cmd.run:
-  {% if OSVERSION == 7 %}
-    {% for pkg in std_tools_settings.packages.rhel7 %}
     - name: {{ pkg }}
-    {% endfor %}
-  {% elif OSVERSION == 6 %}
-    {% for pkg in std_tools_settings.packages.rhel6 %}
+{% endfor %}
+{% elif OSVERSION == 6 %}
+{% for pkg in std_tools_settings.packages.rhel6 %}
+install_std_tools_{{ pkg }}:
+  cmd.run:
     - name: {{ pkg }}
-    {% endfor %}
-  {% endif %}
+{% endfor %}
+{% endif %}
 {% else %}
 
 skip_std_tools_installation:
