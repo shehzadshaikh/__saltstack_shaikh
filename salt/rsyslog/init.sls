@@ -33,10 +33,10 @@ rsyslog_workdirectory:
     - makedirs: True
 
 {% for filename in rsyslog_settings.custom_configs %}
-rsyslog_custom_{{filename}}:
+rsyslog_custom_{{ filename }}:
   file.managed:
     - name: /etc/rsyslog.d/{{ filename }}
     - source: salt://rsyslog/files/{{ filename }}
     - watch_in:
-      - service: {{ rsyslog_settings.service }}
+      - service: start_rsyslog_service
 {% endfor %}
