@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "ntp/files/map.jinja" import ntp_settings with context %}
+{% from "ntp/map.jinja" import ntp_settings with context %}
 
 install_ntp_service:
   pkg.installed:

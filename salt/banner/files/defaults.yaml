@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
+
+sshd:
+    config:
+      filename: /etc/banner.net
+      source: salt://ntp/files/banner.net
+      
+    service: 
+      name: sshd
+      enable: true
+      reload: true
+      
+    sshd_config:
+        filename: /etc/ssh/sshd_config
