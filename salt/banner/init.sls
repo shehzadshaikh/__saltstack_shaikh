@@ -19,7 +19,11 @@ modify_sshd_config:
   file.blockreplace:
     - name: {{ banner_settings.sshd_config.filename }}
     - marker_start: "# no default banner path"
+    {% if OSVERSION == 7 %}
     - marker_end: "# Accept locale-related environment variables"
+    {% elif OSVERSION == 6 %}
+    - marker_end: "# override default of no subsystems"
+    {% endif %}
     - content: Banner {{ banner_settings.config.filename }}
     - append_if_not_found: True
     - backup: '.bkp'

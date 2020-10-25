@@ -4,7 +4,7 @@
 banner:
     config:
       filename: /etc/banner.net
-      source: salt://ntp/files/banner.net
+      source: salt://banner/files/banner.net
       
     service: 
       name: sshd
