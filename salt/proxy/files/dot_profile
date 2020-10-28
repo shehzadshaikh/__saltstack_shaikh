@@ -1,3 +1,0 @@
-export http://####:####@10.10.10.131:3128/
-export http_proxy=user:pass@my.proxy.server:8080
-export https_proxy=user:pass@my.proxy.server:8080

@@ -21,24 +21,24 @@ Initiate salt-minon through salt-ssh stateapply saltminion.sls and maintain stat
 =======
 Apply generic state : Stanard configurations
 Standard Configuration:
- - ntp
- - sshd
- - rsyslog
- - selinux
- - stdtools (wget, unzip, expect, lsof, telnet, nc/netcat, tree, screen, nettools, tmux, m4, motif, rsync, mlocate, traceroute, tcpdump ..)
- - firewalld/iptables/??ufw
- - motd
- - zabbix_agent
- - ds_agent
- - nexus_repo
- - cisbenchmark
- - localusers
- - adjoin
- - swap_space
- - java
- - salt-minon
- - configure history
- - network
+ - [x] ntp
+ - [x] sshd
+ - [x] rsyslog
+ - [x] selinux
+ - [x] stdtools (wget, unzip, expect, lsof, telnet, nc/netcat, tree, screen, nettools, tmux, m4, motif, rsync, mlocate, traceroute, tcpdump ..)
+ - [x] firewalld/iptables/??ufw
+ - [] motd
+ - [] zabbix_agent
+ - [] ds_agent
+ - [] nexus_repo
+ - [] cis_benchmark
+ - [x] localusers
+ - [] adjoin 
+ - [] swap_space
+ - [] java
+ - [] salt-minon
+ - [] configure history
+ - [] network
 
 [] STEP 5:
 =======
