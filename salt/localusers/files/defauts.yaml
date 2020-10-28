@@ -1,27 +1,17 @@
 # -*- username: coding utf-8 -*-
 # vim: ft=sls
 
-users:
+localusers:
     userlist:
-      - username: username01
+      - username: salty
         enable: false
-        fullname: User Name
+        fullname: Salt SSH
         groups:
-          - wheel
-        ssh_auth_source: salt://users/files/keys/cramaker.pub
-      - username: jrush
-        enable: true
-        fullname: Jason Rush
-        groups:
-          - wheel
-        ssh_auth_source: salt://users/files/keys/jrush.pub
+          name: salty
+          id: 6551 
+        ssh_auth_source: salt://users/files/keys/salty.pub
+        sudoers_file: /etc/sudoers.d/salty_sudoers
     supplementary_userlist:
     supplementary_sudoers:
     permissions:
       files:
-        - /var/log/audit
-        - /var/log/cron
-        - /var/log/messages
-        - /var/log/secure
-        - /var/log/yum.log
-  
