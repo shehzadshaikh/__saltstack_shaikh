@@ -1,0 +1,34 @@
+{% from "nexus_repo/map.jinja" import nexus_settings with context -%}
+{% set OSVERSION = salt['grains.get']("osmajorrelease") -%}
+{% set OSFAMILY = %}
+
+{% set os = grains['osmajorrelease'] %}
+{% if os == 8 %}
+  {% set base = 'https://slitrepo.it.slb.com:8443/repository/proxy-epel/8/Everything' %}
+{% else %}
+  {% set base = 'https://slitrepo.it.slb.com:8443/repository/proxy-epel/' + os|string %}
+{% endif %}
+
+[epel]
+name=Extra Packages for Linux {{os}} - $basearch - Nexus Proxy
+baseurl={{ nexus_settings.config.repo_url }}/$basearch
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{os}}
+skip_if_unavailable=True
+
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux {{os}} - $basearch - Debug - Nexus Proxy
+baseurl={{base}}/$basearch/debug
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{os}}
+gpgcheck=0
+skip_if_unavailable=True
+
+[epel-source]
+name=Extra Packages for Enterprise Linux {{os}} - $basearch - Source - Nexus Proxy
+baseurl={{base}}/SRPMS
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{os}}
+gpgcheck=0
+skip_if_unavailable=True

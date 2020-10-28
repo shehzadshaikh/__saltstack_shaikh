@@ -16,6 +16,10 @@ std_tools:
       - tree
       - telnet
       - nmap-ncat
+      - rsync
+      - mlocate
+      - tcpdump
+      - traceroute
     rhel6:
       - wget
       - unzip
@@ -28,3 +32,8 @@ std_tools:
       - tree
       - telnet
       - nc
+      - rsync
+      - mlocate
+      - tcpdump
+      - traceroute
+      
