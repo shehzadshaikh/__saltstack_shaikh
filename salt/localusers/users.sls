@@ -9,7 +9,7 @@ create_user_{{ localusers_settings.userlist.username }}:
     - groups:
       - {{ localusers_settings.userlist.groups.name }}
     - require:
-      - sls: sudoers
+      - group: create_group_{{ localusers_settings.userlist.groups.name }}
 
 ssh_key_{{ localusers_settings.userlist.username }}:
   ssh_auth.present:
