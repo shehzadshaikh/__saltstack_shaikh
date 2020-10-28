@@ -8,4 +8,4 @@
 {% import_yaml "localusers/files/defaults.yaml" as defaults %}
 
 {# Merge in users:lookup pillar #}
-{% set users_settings = salt['pillar.get']('localusers:lookup', default=defaults.localusers, merge=True) %}
+{% set localusers_settings = salt['pillar.get']('localusers:lookup', default=defaults.localusers, merge=True) %}
