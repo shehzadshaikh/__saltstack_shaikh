@@ -11,6 +11,7 @@ configure_proxy_yum:
     - group: root
     - mode: 644
     - template: jinja
+    - backup: minion
 
 configure_proxy_others:
   file.managed:

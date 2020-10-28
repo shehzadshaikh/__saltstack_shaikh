@@ -7,5 +7,5 @@
 {# Imports defaults #}
 {% import_yaml "proxy/files/defaults.yaml" as defaults %}
 
-{# Merge in sshd:lookup pillar #}
+{# Merge in proxy:lookup pillar #}
 {% set proxy_settings = salt['pillar.get']('proxy:lookup', default=defaults.proxy, merge=True) %}

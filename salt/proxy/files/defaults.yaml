@@ -8,7 +8,7 @@ proxy:
       source: salt://proxy/files/proxy_setting.conf
     other:
       filename: /etc/profile.d/http_proxy.sh
-        source: salt://proxy/files/proxy_setting.conf
+      source: salt://proxy/files/proxy_setting.conf
     data:
       server: "10.10.10.131:3128"
       username: '#####'
