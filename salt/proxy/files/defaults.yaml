@@ -9,4 +9,3 @@ proxy:
       server: "http://10.10.10.131:3128/"
       username: '#####'
       password: '#####'
-
