@@ -6,6 +6,7 @@
 include:
   - {{ slspath }}/sudoers
 
+{# TODO: loop through users list/map #}
 create_user_{{ localusers_settings.userlist.username }}:
   user.present:
     - name: {{ localusers_settings.userlist.username }}
