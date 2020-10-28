@@ -26,4 +26,4 @@ source_proxy_env:
   cmd.run:
     - name: source {{ proxy_settings.config.other.source }}
     - require:
-      - file: {{ proxy_settings.config.other.name }}
+      - file: {{ proxy_settings.config.other.filename }}
