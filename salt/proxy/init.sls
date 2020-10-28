@@ -21,3 +21,10 @@ configure_proxy_others:
     - group: root
     - mode: 644
     - template: jinja
+
+source_proxy_env:
+  cmd.run:
+    - name: |
+      source {{ proxy_settings.config.other.source }}
+    - require:
+      file: {{ proxy_settings.config.other.source }}
