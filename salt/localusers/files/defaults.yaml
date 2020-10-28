@@ -3,14 +3,14 @@
 
 localusers:
     userlist:
-      - username: salty
-        enable: false
-        fullname: Salt SSH
-        groups:
-          name: salty
-          id: 6551 
-        ssh_auth_source: salt://users/files/keys/salty.pub
-        sudoers_file: /etc/sudoers.d/salty_sudoers
+      username: salty
+      enable: false
+      fullname: Salt SSH
+      groups:
+        name: salty
+        id: 6551 
+      ssh_auth_source: salt://users/files/keys/salty.pub
+      sudoers_file: /etc/sudoers.d/salty_sudoers
     supplementary_userlist:
     supplementary_sudoers:
     permissions:
