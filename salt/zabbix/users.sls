@@ -6,7 +6,7 @@
 create_zabbix_agent_user:
   user.present:
     - name: {{ zabbix_settings.user }}
-    - group: 
+    - groups:
       - {{ zabbix_settings.group }}
     - createhome: False                # Home directory should be created by pkg scripts
     - shell: {{ zabbix_settings.shell }}
