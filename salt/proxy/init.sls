@@ -11,7 +11,7 @@ configure_proxy_yum:
     - group: root
     - mode: 644
     - template: jinja
-    - backup: minion
+    - backup: minion        # backup files are stored on minion under - /var/cache/salt/minion/file_backup/
 
 configure_proxy_others:
   file.managed:

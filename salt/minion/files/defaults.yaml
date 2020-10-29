@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+minion:
+  config:
+    filename: /tmp/bootstrap-salt.sh
+    source: salt://minion/files/bootstrap-salt.sh
+  salt_master: 10.1.1.1
+  service:
+    name: salt-minion
+    enable: true

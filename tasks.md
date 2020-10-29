@@ -7,12 +7,12 @@ salt-ssh with public key
 https://docs.saltstack.com/en/latest/topics/ssh/
 
 
-[] STEP 2:
+[x] STEP 2:
 =======
 yum repo local.nexus and proxy in yum.repo for internet.
+proxy setup for public repositories
 
-
-[] STEP 3:
+[x] STEP 3:
 =======
 Initiate salt-minon through salt-ssh stateapply saltminion.sls and maintain state
 
