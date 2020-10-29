@@ -10,6 +10,7 @@ include:
 install_{{ package }}:
   pkg.installed:
     - name: {{ package }}
+    - version: {{ zabbix_settings.agent.version }} 
     - require_in:
       - user: create_zabbix_agent_user
       - group: create_zabbix_agent_group
