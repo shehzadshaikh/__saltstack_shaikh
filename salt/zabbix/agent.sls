@@ -24,7 +24,7 @@ start_zabbix_agent_service:
 
 zabbix_agent_config:
   file.managed:
-  - name: {{ zabbix_setting.config.filename }}
+  - name: {{ zabbix_settings.config.filename }}
   - source: {{ zabbix_setting.config.source }}
   - template: jinja
   - require:
