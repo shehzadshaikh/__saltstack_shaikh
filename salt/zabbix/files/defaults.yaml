@@ -2,15 +2,18 @@
 # vim: ft=yaml
 
 zabbix:
-  version: 2.4
+  agent:
+    version: 2.4
+    pkg:
+      - zabbix-agent
+      - zabbix-sender  
   user: zabbix
   group: zabbix
   shell: /sbin/nologin
-  agent:
-    pkg:
-      - zabbix-agent
-      - zabbix-sender
-    service: zabbix-agent
+  service: 
+    name: zabbix-agent
+    enable: true
+  files:
     config: /etc/zabbix/zabbix_agentd.conf
     pidfile: /var/run/zabbix/zabbix_agentd.pid
     logfile: /var/log/zabbix/zabbix_agentd.log

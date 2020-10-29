@@ -8,7 +8,7 @@
 
 
 {% if OSFAMILY == "RedHat" and OSVERSION >= 6 %}
-{%- if zabbix_settings.version_repo|float > 3.0 %}
+{%- if zabbix_settings.agent.version|float > 3.0 %}
 {%-   set GPGKEY = 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591' %}
 {%- else %}
 {%-   set GPGKEY = 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-79EA5ED4' %}
@@ -18,7 +18,7 @@ zabbix_agent_repo:
   pkgrepo.managed:
     - name: zabbix
     - humanname: Zabbix Official Repository - $basearch
-    - baseurl: http://repo.zabbix.com/zabbix/{{ zabbix_settings.version_repo }}/rhel/{{ grains['osmajorrelease']|int }}/$basearch/
+    - baseurl: http://repo.zabbix.com/zabbix/{{ zabbix_settings.agent.version }}/rhel/{{ grains['osmajorrelease']|int }}/$basearch/
     - gpgcheck: 1
     - gpgkey: {{ GPGKEY }}
 
