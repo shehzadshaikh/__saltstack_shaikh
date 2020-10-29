@@ -25,7 +25,7 @@ start_zabbix_agent_service:
 zabbix_agent_config:
   file.managed:
   - name: {{ zabbix_settings.config.filename }}
-  - source: {{ zabbix_setting.config.source }}
+  - source: {{ zabbix_settings.config.source }}
   - template: jinja
   - require:
     - pkg: zabbix-agent
