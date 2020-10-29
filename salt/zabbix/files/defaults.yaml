@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+zabbix:
+  version: 2.4
+  user: zabbix
+  group: zabbix
+  shell: /sbin/nologin
+  agent:
+    pkg:
+      - zabbix-agent
+      - zabbix-sender
+    service: zabbix-agent
+    config: /etc/zabbix/zabbix_agentd.conf
+    pidfile: /var/run/zabbix/zabbix_agentd.pid
+    logfile: /var/log/zabbix/zabbix_agentd.log
