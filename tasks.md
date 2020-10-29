@@ -28,6 +28,7 @@ Standard Configuration:
  - [x] stdtools (wget, unzip, expect, lsof, telnet, nc/netcat, tree, screen, nettools, tmux, m4, motif, rsync, mlocate, traceroute, tcpdump ..)
  - [x] firewalld/iptables/??ufw
  - [] motd
+ - [x] banner
  - [] zabbix_agent
  - [] ds_agent
  - [] nexus_repo
@@ -36,8 +37,9 @@ Standard Configuration:
  - [] adjoin 
  - [] swap_space
  - [] java
- - [] salt-minon
- - [] configure history
+ - [x] salt-minon
+ - [x] configure history
+ - [x] limits
  - [] network
 
 [] STEP 5:

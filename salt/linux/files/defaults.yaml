@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+linux:
+  config:
+    history:
+      enable: true
+      filename: /etc/profile.d/bash_history.sh
+      source: salt://linux/files/bash_history.sh
+    limits:
+      pkgs:
+        centos: pam
+        rhel: pam
+        ubuntu: login
+      filename: /etc/security/limits.conf
+      source: salt://linux/files/limits.conf
