@@ -6,7 +6,6 @@ zabbix:
     version: 2.4.6
     pkg:
       - zabbix-agent
-      - zabbix-sender  
   user: zabbix
   group: zabbix
   shell: /sbin/nologin
