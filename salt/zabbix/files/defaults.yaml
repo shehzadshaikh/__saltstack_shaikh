@@ -13,7 +13,6 @@ zabbix:
   service: 
     name: zabbix-agent
     enable: true
-  files:
-    config: /etc/zabbix/zabbix_agentd.conf
-    pidfile: /var/run/zabbix/zabbix_agentd.pid
-    logfile: /var/log/zabbix/zabbix_agentd.log
+  config:
+    filename: /etc/zabbix/zabbix_agentd.conf
+    source: salt://zabbix/files/zabbix_agentd.conf

@@ -3,30 +3,36 @@
 
 {% from "zabbix/map.jinja" import zabbix_settings with context -%}
 
-{% set settings = salt['pillar.get']('zabbix-agent', {}) -%}
-{% set defaults = zabbix.get('agent', {}) -%}
-{% if salt['grains.get']('os') != 'Windows' %}
 include:
-  - zabbix.users
-{% endif %}
+  - {{ slspath }}/users
 
-install_zabbix_agent:
+{% for package in zabbix_settings.agent.pkg %}
+install_{{ package }}:
   pkg.installed:
-    - pkgs:
-      {%- for name in zabbix.agent.pkgs %}
-      - {{ name }}{% if zabbix.agent.version is defined and 'zabbix' in name %}: '{{ zabbix.agent.version }}'{% endif %}
-      {%- endfor %}
-{% if salt['grains.get']('os') != 'Windows' %}
+    - name: {{ package }}
     - require_in:
-      - user: zabbix-formula_zabbix_user
-      - group: zabbix-formula_zabbix_group
-{% endif %}
+      - user: create_zabbix_agent_user
+      - group: create_zabbix_agent_group
+{% endfor %}
+
+start_zabbix_agent_service:
   service.running:
-    - name: {{ zabbix.agent.service }}
-    - enable: True
+    - name: {{ zabbix_settings.service.name }}
+    - enable: {{ zabbix_settings.service.enable }}
     - require:
       - pkg: zabbix-agent
-      - file: zabbix-agent-logdir
-{% if salt['grains.get']('os') != 'Windows' %}
-      - file: zabbix-agent-piddir
-{% endif %}
+
+zabbix_agent_config:
+  file.managed:
+  - name: {{ zabbix_setting.config.filename }}
+  - source: {{ zabbix_setting.config.source }}
+  - template: jinja
+  - require:
+    - pkg: zabbix-agent
+
+zabbix_agentd.conf.d:
+  file.directory:
+  - name: /etc/zabbix/zabbix_agentd.conf.d
+  - makedirs: true
+  - require:
+    - pkg: zabbix-agent
