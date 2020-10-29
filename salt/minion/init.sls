@@ -13,9 +13,9 @@ copy_minion_bootstrap:
 execute_minion_bootstrap:
   cmd.run:
     - name: |
-      "bash {{ minion_settings.config.filename }} \
-        -P -X -i $(hostname -s) -A {{ minion_settings.salt_master }} \
-        > {{ minion_settings.config.filename }}_$(date +%Y%m%d).output 2>&1"
+        "bash {{ minion_settings.config.filename }} \
+          -P -X -i $(hostname -s) -A {{ minion_settings.salt_master }} \
+          > {{ minion_settings.config.filename }}_$(date +%Y%m%d).output 2>&1"
     - require:
       - file: {{ minion_settings.config.filename }}
 
