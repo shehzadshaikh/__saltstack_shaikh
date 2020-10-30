@@ -8,7 +8,7 @@
 
 
 {% for package in zabbix_settings.agent.pkgs %}
-download_zabbix_agent_rpm:
+download_{{ package }}_rpm:
   file.managed:
     - name: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.minor }}-1.el7.x86_64.rpm
     - source: https://repo.zabbix.com/zabbix/{{ zabbix_settings.agent.version.major }}/rhel/{{ OSVERSION }}/x86_64/{{ package }}-{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
