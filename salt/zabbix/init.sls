@@ -6,14 +6,39 @@
 {% set OSFAMILY = salt['grains.get']("os_family") -%}
 {% set OSVERSION = salt['grains.get']("osmajorrelease")|int -%}
 
+install_wget_package:
+  pkg.installed:
+    - name: wget
+    - unless:
+      - rpm -q wget
+
+create_opt_directory:
+  file.directory:
+    - name: /opt/zabbix
+    - makedirs: true
 
 {% for package in zabbix_settings.agent.pkgs %}
 download_{{ package }}_rpm:
-  file.managed:
-    - name: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.minor }}-1.el7.x86_64.rpm
-    - source: https://repo.zabbix.com/zabbix/{{ zabbix_settings.agent.version.major }}/rhel/{{ OSVERSION }}/x86_64/{{ package }}-{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
-    - user: root
-    - group: root
-    - mkdirs: true
+  cmd.run:
+    - name: |
+        wget https://repo.zabbix.com/zabbix/{{ zabbix_settings.agent.version.major }}/rhel/{{ OSVERSION }}/x86_64/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm \
+        -o /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
+    - create: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
+    - unless:
+      - rpm -q {{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
+
+install_{{ package }}_rpm:
+  pkg.installed:
+    - name: {{ package }}
+    - enable: true
+    - source:
+      - {{ package }}: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
 {% endfor %}
 
+copy_zabbix_agent_configs:
+  file.managed:
+  - name: {{ zabbix_settings.config.filename }}
+  - source: {{ zabbix_settings.config.source }}
+  - template: jinja
+  - require:
+    - pkg: zabbix-agent
