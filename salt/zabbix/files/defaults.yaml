@@ -3,8 +3,11 @@
 
 zabbix:
   agent:
-    version: 2.4.6
-    pkg:
+    version:
+      major: 2.4
+      minior: 6
+    pkgs:
+      - zabbix
       - zabbix-agent
   user: zabbix
   group: zabbix
