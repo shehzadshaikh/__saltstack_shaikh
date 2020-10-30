@@ -40,5 +40,14 @@ copy_zabbix_agent_configs:
   - name: {{ zabbix_settings.config.filename }}
   - source: {{ zabbix_settings.config.source }}
   - template: jinja
+  - backup: minion
   - require:
     - pkg: zabbix-agent
+
+start_zabbix_agent_service:
+  service.running:
+    - name: {{ zabbix_settings.service.name }}
+    - enable: {{ zabbix_settings.service.enable }}
+    - require:
+      - pkg: zabbix-agent
+      - file: copy_zabbix_agent_configs
