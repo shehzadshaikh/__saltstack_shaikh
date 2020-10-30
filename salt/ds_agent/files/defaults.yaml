@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+dsagent:
+    agent:
+      version:
+        major: 2.4
+        minor: 6
+    pkgs: ds_agent
+    service: 
+      name: ds_agent
+      enable: true
+    config:
+      filename: /etc/zabbix/zabbix_agentd.conf
+      source: salt://zabbix/files/zabbix_agentd.conf
