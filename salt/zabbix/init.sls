@@ -7,7 +7,7 @@
 {% set OSVERSION = salt['grains.get']("osmajorrelease")|int -%}
 
 
-{% for package in zabbix_settings.pkgs %}
+{% for package in zabbix_settings.agent.pkgs %}
 download_zabbix_agent_rpm:
   file.managed:
     - name: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.minor }}-1.el7.x86_64.rpm
