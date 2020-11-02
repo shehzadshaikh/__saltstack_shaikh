@@ -26,7 +26,7 @@ install_ds_agent_rpm:
     - source:
       {% if OSVERSION == 6 %}  
       - ds_agent: {{ dsagent_settings.pkg.rhel6 }}
-      {% if OSVERSION == 7 %}
+      {% elif OSVERSION == 7 %}
       - ds_agent: {{ dsagent_settings.pkg.rhel7 }}
       {% endif %}
 {% else %}
