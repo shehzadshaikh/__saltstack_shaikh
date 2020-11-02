@@ -20,14 +20,15 @@ create_opt_directory:
 
 {% if OSFAMILY == "RedHat" %}
 install_ds_agent_rpm:
+  {% if OSVERSION == 6 %}  
   cmd.run:
-    {% if OSVERSION == 6 %}
     - name: |
         rpm -i {{ dsagent_settings.pkg.rhel6 }}/{{ dsagent_settings.pkg.installable }}*.rpm
-    {% elif OSVERSION == 7 %}
-    - name: |
+  {% elif OSVERSION == 7 %}
+  cmd.run:
+     - name: |
         rpm -i {{ dsagent_settings.pkg.rhel7 }}/{{ dsagent_settings.pkg.installable }}*.rpm
-    {% endif %}
+  {% endif %}
 {% else %}
 
 skip_ds_agent_installation:
