@@ -19,33 +19,15 @@ create_opt_directory:
     - makedirs: true
 
 {% if OSFAMILY == "RedHat" %}
-download_ds_agent_rpm:
-  cmd.run:
-    {% if OSVERSION == 6 %}    
-    - name: |
-        mkdir -p {{ dsagent_settings.config.downloads }}
-        wget {{ dsagent_settings.pkg.downloadable.rhel6 }} -o /opt/downloads/ds_agent.zip
-    {% elif OSVERSION == 7 %}
-    - name: |
-        mkdir -p {{ dsagent_settings.config.downloads }}
-        wget {{ dsagent_settings.pkg.downloadable.rhel7 }} -o /opt/downloads/ds_agent.zip
-    {% endif %}
-    - create: /opt/downloads/ds_agent.zip
-    - unless:
-      - test -f /opt/downloads/ds_agent.zip
-
-unzip_ds_agent:
-  module.run:
-    - name: archive.unzip
-    - zip_file: /opt/downloads/ds_agent.zip
-    - dest: {{ dsagent_settings.config.downloads }}
-    - onlyif:
-      - test -f /opt/downloads/ds_agent.zip
-
 install_ds_agent_rpm:
   cmd.run:
+    {% if OSVERSION == 6 %}
     - name: |
-        rpm -i {{ dsagent_settings.config.downloads }}/{{ dsagent_settings.pkg.installable }}*.rpm
+        rpm -i {{ dsagent_settings.pkg.rhel6 }}/{{ dsagent_settings.pkg.installable }}*.rpm
+    {% elif OSVERSION == 7 %}
+    - name: |
+        rpm -i {{ dsagent_settings.pkg.rhel7 }}/{{ dsagent_settings.pkg.installable }}*.rpm
+    {% endif %}
 {% else %}
 
 skip_ds_agent_installation:
