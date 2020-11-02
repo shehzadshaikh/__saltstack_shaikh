@@ -24,9 +24,9 @@ download_ds_agent_rpm:
     - name: |
         mkdir -p {{ dsagent_settings.config.downloads }}
         {% if OSVERSION == 6 %}
-        wget {{ dsagent_settings.agent.downloadable.rhel6 }} -o /opt/downloads/ds_agent.zip
+        wget {{ dsagent_settings.pkg.downloadable.rhel6 }} -o /opt/downloads/ds_agent.zip
         {% elif OSVERSION == 7 %}
-        wget {{ dsagent_settings.agent.downloadable.rhel7 }} -o /opt/downloads/ds_agent.zip
+        wget {{ dsagent_settings.pkg.downloadable.rhel7 }} -o /opt/downloads/ds_agent.zip
         {% endif %}
     - create: /opt/downloads/ds_agent.zip
     - unless:
