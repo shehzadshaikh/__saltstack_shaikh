@@ -7,7 +7,7 @@
 {% set OSVERSION = salt['grains.get']("osmajorrelease")|int -%}
 {% set REPO_URL = "https://files.trendmicro.com/products/deepsecurity/en/" %}
 
-{% for pkg in ['wget', 'unzip']%}
+{% for pkg in ['wget', 'unzip'] %}
 install_{{ pkg }}_package:
   pkg.installed:
     - name: {{ pkg }}
@@ -17,9 +17,10 @@ install_{{ pkg }}_package:
 
 create_opt_directory:
   file.directory:
-    - name: /opt/ds_agent
+    - name: {{ dsagent_settings.config.filename }}
     - makedirs: true
 
+{% if OSFAMILY == "RedHat" %}
 {% for package in zabbix_settings.agent.pkgs %}
 download_{{ package }}_rpm:
   cmd.run:
@@ -39,6 +40,13 @@ install_{{ package }}_rpm:
     - source:
       - {{ package }}: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
 {% endfor %}
+{% else %}
+
+skip_ds_agent_installation:
+  test.show_notification:
+    - text: |
+        "DS Agent installation currently doesn't support non-RHEL OS, current OS {{ OSFAMILY }}"
+{% endif %}
 
 {# TODO: update configuration file and register deep security agent with management console if needed #}
 
