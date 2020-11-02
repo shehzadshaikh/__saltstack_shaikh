@@ -7,13 +7,11 @@
 {% set OSVERSION = salt['grains.get']("osmajorrelease")|int -%}
 {% set REPO_URL = "https://files.trendmicro.com/products/deepsecurity/en/" %}
 
-{% for pkg in ['wget', 'unzip'] %}
-install_{{ pkg }}_package:
-  pkg.installed:
-    - name: {{ pkg }}
-    - unless:
-      - rpm -q {{ pkg }}
-{% endfor $}
+{# REQUIREMENT: 
+ # Following packages are needed for sucessful state run
+ #  1. unizp
+ #  2. wget
+ #}
 
 create_opt_directory:
   file.directory:
