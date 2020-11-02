@@ -21,13 +21,15 @@ create_opt_directory:
 {% if OSFAMILY == "RedHat" %}
 download_ds_agent_rpm:
   cmd.run:
+    {% if OSVERSION == 6 %}    
     - name: |
         mkdir -p {{ dsagent_settings.config.downloads }}
-        {% if OSVERSION == 6 %}
         wget {{ dsagent_settings.pkg.downloadable.rhel6 }} -o /opt/downloads/ds_agent.zip
-        {% elif OSVERSION == 7 %}
+    {% elif OSVERSION == 7 %}
+    - name: |
+        mkdir -p {{ dsagent_settings.config.downloads }}
         wget {{ dsagent_settings.pkg.downloadable.rhel7 }} -o /opt/downloads/ds_agent.zip
-        {% endif %}
+    {% endif %}
     - create: /opt/downloads/ds_agent.zip
     - unless:
       - test -f /opt/downloads/ds_agent.zip
