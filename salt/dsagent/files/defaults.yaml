@@ -12,5 +12,5 @@ dsagent:
       name: ds_agent
       enable: true
     config:
-      filename: /opt/ds_agent/
-      source: salt://ds_agent/files/
+      rpm: /opt/dsagent_rpm/
+
