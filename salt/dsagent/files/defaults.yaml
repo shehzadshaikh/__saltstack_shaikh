@@ -14,4 +14,3 @@ dsagent:
     config:
       filename: /opt/ds_agent/
       source: salt://ds_agent/files/
-      downloads: /opt/downloads/ds_agent
