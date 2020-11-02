@@ -5,12 +5,12 @@
 
 {% set OSFAMILY = salt['grains.get']("os_family") -%}
 {% set OSVERSION = salt['grains.get']("osmajorrelease")|int -%}
-{% set REPO_URL = "https://files.trendmicro.com/products/deepsecurity/en/" %}
 
 {# REQUIREMENT: 
- # Following packages are needed for sucessful state run
- #  1. unizp
- #  2. wget
+ # Following packages or states are needed for sucessful state run
+ #  1. proxy state
+ #  2. unizp package
+ #  3. wget package
  #}
 
 create_opt_directory:
@@ -19,25 +19,31 @@ create_opt_directory:
     - makedirs: true
 
 {% if OSFAMILY == "RedHat" %}
-{% for package in zabbix_settings.agent.pkgs %}
-download_{{ package }}_rpm:
+download_ds_agent_rpm:
   cmd.run:
     - name: |
-        wget {{ REPO_URL }}/{{ dsagent_settings.agent.version }}/{{ dsagent_settings.pkg.downloadable }}_EL{{ OSVERSION }}-{{ dsagent_settings.agent.version }}
-    - name: |
-        wget https://repo.zabbix.com/zabbix/{{ zabbix_settings.agent.version.major }}/rhel/{{ OSVERSION }}/x86_64/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm \
-        -o /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
-    - create: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
+        mkdir -p {{ dsagent_settings.config.downloads }}
+        {% if OSVERSION == 6 %}
+        wget {{ dsagent_settings.agent.downloadable.rhel6 }} -o /opt/downloads/ds_agent.zip
+        {% elif OSVERSION == 7 %}
+        wget {{ dsagent_settings.agent.downloadable.rhel7 }} -o /opt/downloads/ds_agent.zip
+        {% endif %}
+    - create: /opt/downloads/ds_agent.zip
     - unless:
-      - rpm -q {{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
+      - test -f /opt/downloads/ds_agent.zip
 
-install_{{ package }}_rpm:
-  pkg.installed:
-    - name: {{ package }}
-    - enable: true
-    - source:
-      - {{ package }}: /opt/zabbix/{{ package }}-{{ zabbix_settings.agent.version.major }}.{{ zabbix_settings.agent.version.minor }}-1.el{{ OSVERSION }}.x86_64.rpm
-{% endfor %}
+unzip_ds_agent:
+  module.run:
+    - name: archive.unzip
+    - zip_file: /opt/downloads/ds_agent.zip
+    - dest: {{ dsagent_settings.config.downloads }}
+    - onlyif:
+      - test -f /opt/downloads/ds_agent.zip
+
+install_ds_agent_rpm:
+  cmd.run:
+    - name: |
+        rpm -i {{ dsagent_settings.config.downloads }}/{{ dsagent_settings.pkg.installable }}*.rpm
 {% else %}
 
 skip_ds_agent_installation:

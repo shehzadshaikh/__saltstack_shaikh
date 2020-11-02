@@ -5,7 +5,9 @@ dsagent:
     agent:
       version: 11.0
     pkg:
-      downloadable: Agent-RedHat
+      downloadable: 
+        rhel7: https://files.trendmicro.com/products/deepsecurity/en/11.0/Agent-RedHat_EL7-11.0.0-796.x86_64.zip
+        rhel6: https://files.trendmicro.com/products/deepsecurity/en/11.0/Agent-RedHat_EL6-11.0.0-796.x86_64.zip
       installable: Agent-Core-RedHat
     service: 
       name: ds_agent
@@ -13,3 +15,4 @@ dsagent:
     config:
       filename: /opt/ds_agent/
       source: salt://ds_agent/files/
+      downloads: /opt/downloads/ds_agent
