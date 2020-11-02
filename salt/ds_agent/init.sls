@@ -8,11 +8,12 @@
 {% set REPO_URL = "https://files.trendmicro.com/products/deepsecurity/en/" %}
 
 {% for pkg in ['wget', 'unzip']%}
-install_wget_package:
+install_{{ pkg }}_package:
   pkg.installed:
     - name: {{ pkg }}
     - unless:
       - rpm -q {{ pkg }}
+{% endfor $}
 
 create_opt_directory:
   file.directory:
