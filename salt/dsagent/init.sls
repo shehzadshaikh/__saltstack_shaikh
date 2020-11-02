@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "ds_agent/map.jinja" import dsagent_settings with context -%}
+{% from "dsagent/map.jinja" import dsagent_settings with context -%}
 
 {% set OSFAMILY = salt['grains.get']("os_family") -%}
 {% set OSVERSION = salt['grains.get']("osmajorrelease")|int -%}
