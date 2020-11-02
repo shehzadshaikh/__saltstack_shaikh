@@ -3,13 +3,13 @@
 
 dsagent:
     agent:
-      version:
-        major: 2.4
-        minor: 6
-    pkgs: ds_agent
+      version: 11.0
+    pkg:
+      downloadable: Agent-RedHat
+      installable: Agent-Core-RedHat
     service: 
       name: ds_agent
       enable: true
     config:
-      filename: /etc/zabbix/zabbix_agentd.conf
-      source: salt://zabbix/files/zabbix_agentd.conf
+      filename: /opt/ds_agent/
+      source: salt://ds_agent/files/

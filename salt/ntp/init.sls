@@ -3,6 +3,9 @@
 
 {% from "ntp/map.jinja" import ntp_settings with context %}
 
+include:
+  - proxy
+
 install_ntp_service:
   pkg.installed:
     - name: {{ ntp_settings.package.name }}

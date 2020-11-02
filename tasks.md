@@ -46,3 +46,10 @@ Standard Configuration:
 [] STEP 5:
 =======
  APPLICATION SPECIFIC BASED ON SERVER STATE.
+
+
+[] IMPROVEMENT 6:
+=======
+ - [] condition for minion installation
+ - [] rsys log fine tuning
+ - [] 
