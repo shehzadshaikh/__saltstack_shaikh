@@ -4,9 +4,10 @@
 dsagent:
     agent:
       version: 11.0
-    pkg: 
-      rhel7: salt://dsagent/files/rpms/Agent-Core-RedHat_EL7-11.0.0-1388.x86_64.rpm
-      rhel6: salt://dsagent/files/rpms/Agent-Core-RedHat_EL6-11.0.0-796.x86_64.rpm
+    pkg:
+      source: salt://dsagent/files/rpms 
+      rhel7: Agent-Core-RedHat_EL7-11.0.0-1388.x86_64.rpm
+      rhel6: Agent-Core-RedHat_EL6-11.0.0-796.x86_64.rpm
       installable: Agent-Core-RedHat
     service: 
       name: ds_agent

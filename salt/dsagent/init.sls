@@ -21,11 +21,11 @@ create_opt_directory:
 {% if OSFAMILY == "RedHat" %}
 copy_ds_agent_rpm:
   file.managed:
-    - name: {{ dsagent_settings.config.rpm }}
+    - name: c
     {% if OSVERSION == 6 %}
-    - source: {{ dsagent_settings.pkg.rhel6 }}
+    - source: {{ dsagent_settings.pkg.source }}/{{ dsagent_settings.pkg.rhel6 }}
     {% elif OSVERSION == 7 %}
-    - source: {{ dsagent_settings.pkg.rhel6 }}
+    - source: {{ dsagent_settings.pkg.source }}/{{ dsagent_settings.pkg.rhel7 }}
     {% endif %}
     - require:
       - file: create_opt_directory
@@ -34,10 +34,10 @@ install_ds_agent_rpm:
   cmd.run:
     {% if OSVERSION == 6 %}
     - name: |
-        rpm -i {{ dsagent_settings.pkg.rhel6 }}
+        rpm -i {{ dsagent_settings.pkg.source }}/{{ dsagent_settings.pkg.rhel6 }}
     {% elif OSVERSION == 7 %}
     - name: |
-        rpm -i {{ dsagent_settings.pkg.rhel7 }}
+        rpm -i {{ dsagent_settings.pkg.source }}/{{ dsagent_settings.pkg.rhel7 }}
     {% endif %}
 
 {% else %}
