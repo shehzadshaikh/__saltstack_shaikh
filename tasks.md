@@ -24,14 +24,15 @@ Apply generic state : Stanard configurations
 Standard Configuration:
  - [x] ntp
  - [x] sshd
+ - [x] proxy
  - [x] rsyslog
  - [x] selinux
  - [x] stdtools (wget, unzip, expect, lsof, telnet, nc/netcat, tree, screen, nettools, tmux, m4, motif, rsync, mlocate, traceroute, tcpdump ..)
  - [x] firewalld/iptables/??ufw
  - [] motd
  - [x] banner
- - [] zabbix_agent
- - [] ds_agent
+ - [x] zabbix_agent
+ - [x] ds_agent
  - [] nexus_repo
  - [] cis_benchmark
  - [x] localusers
