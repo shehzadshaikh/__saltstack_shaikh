@@ -35,10 +35,10 @@ install_ds_agent_rpm:
   cmd.run:
     {% if OSVERSION == 6 %}
     - name: |
-        rpm -i {{ dsagent_settings.pkg.source }}/{{ dsagent_settings.pkg.rhel6 }}
+        rpm -i {{ dsagent_settings.config.rpm }}/{{ dsagent_settings.pkg.rhel6 }}
     {% elif OSVERSION == 7 %}
     - name: |
-        rpm -i {{ dsagent_settings.pkg.source }}/{{ dsagent_settings.pkg.rhel7 }}
+        rpm -i {{ dsagent_settings.config.rpm }}/{{ dsagent_settings.pkg.rhel7 }}
     {% endif %}
 
 {% else %}
