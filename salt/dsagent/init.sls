@@ -40,6 +40,8 @@ install_ds_agent_rpm:
     - name: |
         rpm -i {{ dsagent_settings.config.rpm }}/{{ dsagent_settings.pkg.rhel7 }}
     {% endif %}
+    - unless:
+      - rpm -q ds_agent
 
 {% else %}
 
