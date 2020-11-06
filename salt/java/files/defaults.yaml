@@ -3,8 +3,7 @@
 
 java:
     common:
-      package: java
-      version: 1.8.0-openjdk
+      package: java-1.8.0-openjdk
     config:
       clean: false
       path: /etc/profile.d/java.sh
