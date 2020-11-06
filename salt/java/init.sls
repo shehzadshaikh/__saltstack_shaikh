@@ -9,7 +9,6 @@
 java_install_package:
   pkg.installed:
     - name: {{ java_settings.common.package }}
-    - version: {{ java_settings.common.version }}
     - refresh: true
 
 java_env_var_config:
