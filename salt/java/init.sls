@@ -1,30 +1,21 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
+{% from "java/map.jinja" import java_settings with context %}
 
-{%- from "java/map.jinja" import environment with context %}
-{%- if environment.version == '10' %}
-java_archive:
-  archive.extracted:
-    - name: {{ environment.home_dir }}
-    - source: https://download.java.net/java/GA/jdk{{ environment.version }}/{{ environment.version }}.{{ environment.release}}/{{ environment.oracle_hash }}/{{ environment.version }}/openjdk-{{ environment.version }}.{{ environment.release}}_linux-x64_bin.tar.gz
-    - options: zxvf
-    {%- if environment.get('verify_sha256_hash', False) %}
-    - source_hash: {{ environment.sha256_hash }}
-    {%- else %}
-    - skip_verify: true
-    {%- endif %}
-{%- else %}
-java_packages:
+
+java_install_package:
   pkg.installed:
-  - names: {{ environment.pkgs }}
-{%- if environment.get('development', False) %}
-java_dev_packages:
-  pkg.installed:
-  - names: {{ environment.dev_pkgs }}
-{%- endif %}
-java_home_symlink:
-  file.symlink:
-  - name: {{ environment.home_dir }}
-  - target: /usr/lib/jvm/java-{{ environment.version }}-openjdk-amd64
-{%- endif %}
+    - name: {{ java_settings.common.package }}
+    - version: {{ java_settings.common.version }}
+    - refresh: true
+
+java_env_var_config:
+  file.managed:
+    - name: {{ java_settings.config.path }}
+    - source: {{ java_settings.config.source }}
+    - user: root
+    - group: root
+    - mode: 644
+    - template: jinja
+    - clean: {{ java_settings.config.clean }}

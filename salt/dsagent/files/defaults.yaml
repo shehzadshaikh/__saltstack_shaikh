@@ -13,5 +13,5 @@ dsagent:
       name: ds_agent
       enable: true
     config:
-      rpm: /opt/dsagent_rpm/
+      rpm: /opt/dsagent_rpm
 

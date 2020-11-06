@@ -15,7 +15,7 @@ proxy setup for public repositories
 
 [x] STEP 3:
 =======
-Initiate salt-minon through salt-ssh stateapply saltminion.sls and maintain state
+Initiate salt-minon through salt-ssh state apply saltminion.sls and maintain state
 
 
 [] STEP 4:
@@ -48,9 +48,8 @@ Standard Configuration:
 =======
  APPLICATION SPECIFIC BASED ON SERVER STATE.
 
-
 [] IMPROVEMENT 6:
 =======
  - [] condition for minion installation
  - [] rsys log fine tuning
- - [] 
+ - [] history to export rsys

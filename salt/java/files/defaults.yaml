@@ -1,3 +1,12 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 
+java:
+    common:
+      package: java
+      version: 1.8.0-openjdk
+    config:
+      clean: false
+      path: /etc/profile.d/java.sh
+      source: salt://java/files/java.sh
+  
