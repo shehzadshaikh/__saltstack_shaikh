@@ -77,7 +77,7 @@ ciscat_crontab_perm:
 {% endif %}
 
 #5.1.2 - 5.17 Ensure permissions on /etc/cron.* folder are configured
-{% for directory in ciscat_settings.configs.configs.cron_dirs %}
+{% for directory in ciscat_settings.configs.cron_dirs %}
 std_ciscat_cron_permsissions_{{cf}}:
   file.directory:
     - name: {{ directory }}
