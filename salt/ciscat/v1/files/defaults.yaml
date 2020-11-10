@@ -1,4 +1,4 @@
-cis:
+ciscat:
   configs:
     install_pkgs_override:
       - emptyplaceholder
