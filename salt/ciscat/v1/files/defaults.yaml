@@ -1,11 +1,7 @@
 ciscat:
   configs:
-    install_pkgs_override:
-      - emptyplaceholder
     install_pkgs:
       - chrony
-    remove_pkgs_override:
-      - emptyplaceholder
     remove_pkgs:
       - dovecot
       - setroubleshoot
