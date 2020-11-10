@@ -1,7 +1,8 @@
 ciscat:
   configs:
     install_pkgs:
-      - chrony
+      - tcp_wrappers
+      - rsyslog
     remove_pkgs:
       - dovecot
       - setroubleshoot
