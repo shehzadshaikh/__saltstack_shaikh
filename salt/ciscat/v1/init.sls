@@ -155,7 +155,7 @@ ciscat_grub_invalidate_secure:
 # {% endif %}
 
 
-
+{#
 # {% for fsname in ciscat_settings.disable_filesystem| default(['na']) %}
 # {% if fsname not in ciscat_settings.disable_filesystem_override| default(['ma']) %}
 # std_disable_unused_filesystems_ciscat_accumulated_{{fsname}}:
@@ -316,3 +316,4 @@ ciscat_grub_invalidate_secure:
 
 # {% endif %}
 
+#}
