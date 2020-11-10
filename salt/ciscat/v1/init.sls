@@ -17,7 +17,7 @@ ciscat_remove_{{ package }}:
 {% for package in ciscat_settings.configs.install_pkgs -%}
 ciscat_install_{{ package }}:
   pkg.installed:
-    - nmme: {{ package }}
+    - name: {{ package }}
     - value: 1
 {% endfor -%}
 
