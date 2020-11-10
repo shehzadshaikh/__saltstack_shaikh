@@ -1,0 +1,72 @@
+cis:
+  configs:
+    install_pkgs_override:
+      - emptyplaceholder
+    install_pkgs:
+      - chrony
+    remove_pkgs_override:
+      - emptyplaceholder
+    remove_pkgs:
+      - setroubleshoot
+      - mcstrans
+      - telnet-server
+      - telnet
+      - rsh-server
+      - rsh
+      - ypbind
+      - ypserv
+      - tftp
+      - tftp-server
+      - talk
+      - talk-server
+      - dhcp
+      - bind
+      - vsftpd
+      - dovecot
+      - samba
+      - squid
+      - net-snmp
+    sysctl_disable_override:
+      - emptyplaceholder 
+    sysctl_disable:
+      - fs.suid_dumpable
+      - net.ipv4.ip_forward
+      - net.ipv4.conf.all.send_redirects
+      - net.ipv4.conf.default.send_redirects
+      - net.ipv4.conf.all.accept_source_route
+      - net.ipv4.conf.default.accept_source_route
+      - net.ipv4.conf.all.accept_redirects
+      - net.ipv4.conf.default.accept_redirects
+      - net.ipv4.conf.all.secure_redirects
+      - net.ipv4.conf.default.secure_redirects
+      - net.ipv6.conf.all.accept_ra
+      - net.ipv6.conf.default.accept_ra
+      - net.ipv6.conf.all.accept_redirects
+      - net.ipv6.conf.default.accept_redirects
+    log_files_perm: True
+    rsyslog: True
+    cron_perm: True
+    cron_dirs:
+      - /etc/cron.d
+      - /etc/cron.hourly
+      - /etc/cron.daily
+      - /etc/cron.weekly
+      - /etc/cron.monthly
+      - /etc/cron.yearly
+    ensure_core_dumps: True
+    tcpwrappers: True
+    aide: True
+    grub2:
+      update: True
+      config_file: /etc/default/grub
+      grub_settings:
+        GRUB_TIMEOUT: 30 
+        GRUB_DISABLE_RECOVERY: "false"
+      grub_post: 'grub2-mkconfig -o /boot/grub2/grub.cfg'
+      grub_post_file: /boot/grub2/grub.cfg
+    grub:
+      update: True
+      grub_config: /boot/grub/grub.conf
+      grub_settings:
+        timeout: 30 
+

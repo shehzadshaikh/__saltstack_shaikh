@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{# This is a barebones map.jinja file #}
+{# We import default values that are then merged with pillar data #}
+
+{# Imports defaults #}
+{% import_yaml 'swap/files/defaults.yaml' as defaults %}
+
+{# Merge in swapon:lookup pillar #}
+{% set swap_settings = salt['pillar.get']('swapon:lookup', default=defaults.swap, merge=True) %}

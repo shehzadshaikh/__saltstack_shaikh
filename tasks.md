@@ -38,7 +38,7 @@ Standard Configuration:
  - [x] localusers
  - [] adjoin 
  - [] swap_space
- - [] java
+ - [x] java
  - [x] salt-minon
  - [x] configure history
  - [x] limits
