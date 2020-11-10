@@ -54,6 +54,7 @@ csicat_rsyslog_fielcreatemode:
   file.append:
     - name: /etc/rsyslog.conf
     - text: '$FileCreateMode 0640'
+{% endif %}
 
 # 4.2.4 Ensure permissions on all logfiles are configured
 {% if ciscat_settings.configs.log_files_perm| default(True) %}
@@ -61,6 +62,8 @@ csicat_rsyslog_fielcreatemode:
 ciscat_var_log_perm:
   cmd.run:
     - name: 'find /var/log -type f -exec chmod g-wx,o-rwx {} +'
+  {% endif %}
+{% endif %}
 
 # 5.1.2 Ensure permissions on /etc/crontab file are configured
 {% if ciscat_settings.configs.cron_perm| default(True) %}
@@ -71,6 +74,7 @@ ciscat_crontab_perm:
     - user: root
     - group: root
     - replace: False
+{% endif %}
 
 #5.1.2 - 5.17 Ensure permissions on /etc/cron.* folder are configured
 {% for directory in ciscat_settings.configs.configs.cron_dirs %}
