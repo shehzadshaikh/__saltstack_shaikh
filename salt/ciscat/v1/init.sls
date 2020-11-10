@@ -88,18 +88,7 @@ ciscat_core_dumps_limits:
     - text: '* hard core 0'
 {% endif %}
 
-{% if ciscat_settings.configs.tcpwrappers|default(True) %}
-ciscat_install_tcp_wrappers:
-  pkg.installed:
-    - pkgs:
-      - tcp_wrappers
-{% endif %}
-
 {% if ciscat_settings.aide| default(True) %}
-ciscat_install_aide:
-  pkg.installed:
-    - name: aide 
-
 csicat_aide_cron:
   cron.present:
     - name: /usr/sbin/aide --check" | tee -a /var/spool/cron/root

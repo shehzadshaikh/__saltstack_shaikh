@@ -3,6 +3,7 @@ ciscat:
     install_pkgs:
       - tcp_wrappers
       - rsyslog
+      - aide
     remove_pkgs:
       - dovecot
       - setroubleshoot
