@@ -5,34 +5,29 @@
 
 {% set OSFAMILY = salt['grains.item']('os_family') %}
 {% set OSVERSION = salt['grains.item']('osmajorrelease') %}
+
 {# #}
 {% for package in ciscat_settings.configs.remove_pkgs|default(['na']) -%}
-  {% if package not in ciscat_settings.configs.remove_pkgs_override|default(['na']) -%}
 ciscat_remove_{{ package }}:
   pkg.removed:
     - name: {{ package }}
-  {% endif -%}
 {% endfor -%}
 
 {# #}
 {% for package in ciscat_settings.configs.remove_pkgs -%}
-  {% if package not in ciscat_settings.configs.remove_pkgs_override|default(['na']) -%}
 ciscat_install_{{ package }}:
   pkg.present:
     - nmme: {{ package }}
     - value: 1
-  {% endif -%}
 {% endfor -%}
 
 {# #}
 {% for sysctlv in ciscat_settings.configs.sysctl_disable|default(['na']) %}
-  {% if sysctlv not in ciscat_settings.configs.sysctl_disable_override|default(['na']) %}
 ciscat_sysctl_disable_{{sysctlv}}:
   sysctl.present:
     - name: {{ sysctlv }}
     - value: 0
-  {% endif %}
-{% endfor %}}
+{% endfor %}
 
 {# #}
 {% if ciscat_settings.configs.rsyslog|default(True) %}
