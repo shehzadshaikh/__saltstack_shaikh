@@ -132,188 +132,189 @@ ciscat_grub_invalidate_secure:
     - group: root
 {% endif -%}
 
-# {% if salt['grains.get']('osmajorrelease',0 ) == 6 and  ciscat_settings.grub.update| default(True) %}
-# ## this is only for RHEL 7
-# #chown root:root /boot/grub2/grub.cfg
-# #chmod og-rwx /boot/grub2/grub.cfg
-# {% for grub_setting in ciscat_settings.grub.grub_settings %}
-# std-ciscat-settings-grub.cfg-{{grub_setting}}:
-#   file.line:
-#     - name: {{ciscat_settings.grub.grub_config}}
-#     - match: '{{grub_setting}}=*.'
-#     - content: '{{grub_setting}}={{ciscat_settings.grub.grub_settings[grub_setting]}}'
-#     - mode: replace
-# {% endfor %}
-
-# std-ciscat-grub-post-run-secure:
-#   file.managed:
-#     - name: {{ciscat_settings.grub.grub_config}}
-#     - mode: 600
-#     - user: root
-#     - group: root
-
-# {% endif %}
-
-
 {#
-# {% for fsname in ciscat_settings.disable_filesystem| default(['na']) %}
-# {% if fsname not in ciscat_settings.disable_filesystem_override| default(['ma']) %}
-# std_disable_unused_filesystems_ciscat_accumulated_{{fsname}}:
-#   file.accumulated:
-#     - name: std_ciscat_accumulator_comment
-#     - filename: /etc/modprobe.d/CISCAT.conf
-#     - text: 'install {{fsname}} /bin/true'
-#     - require_in:
-#         - file: std_disable_unused_filesystems_deploy_modprod_d_ciscat_conf
+{% if salt['grains.get']('osmajorrelease',0 ) == 6 and  ciscat_settings.grub.update| default(True) %}
+## this is only for RHEL 7
+#chown root:root /boot/grub2/grub.cfg
+#chmod og-rwx /boot/grub2/grub.cfg
+{% for grub_setting in ciscat_settings.grub.grub_settings %}
+std-ciscat-settings-grub.cfg-{{grub_setting}}:
+  file.line:
+    - name: {{ciscat_settings.grub.grub_config}}
+    - match: '{{grub_setting}}=*.'
+    - content: '{{grub_setting}}={{ciscat_settings.grub.grub_settings[grub_setting]}}'
+    - mode: replace
+{% endfor %}
 
-# {% endif %}
-# {% endfor %}
+std-ciscat-grub-post-run-secure:
+  file.managed:
+    - name: {{ciscat_settings.grub.grub_config}}
+    - mode: 600
+    - user: root
+    - group: root
 
-# # create config file , placing the acumulator data in it
-# std_disable_unused_filesystems_deploy_modprod_d_ciscat_conf:
-#   file.managed:
-#     - name: /etc/modprobe.d/CISCAT.conf
-#     - source: salt://standardconf/linux/files/CISCAT.conf
-#     - mode: 600
-#     - template: jinja
-
-
-# {% if ciscat_settings.etc_issue| default(True) %}
-# std_ciscat_etc_issue_setup:
-#   file.managed:
-#     - name: /etc/issue
-#     - source: salt://standardconf/linux/files/issue
-#     - mode: 644
-#     - user: root
-#     - group: root
-
-# std_ciscat_etc_issue_setup_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing /etc/issue'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_ciscat_etc_issue_setup
-
-# {% endif %}
+{% endif %}
 
 
-# {% if ciscat_settings.etc_issue_net| default(True) %}
-# std_ciscat_etc_issue_net_setup:
-#   file.managed:
-#     - name: /etc/issue.net
-#     - source: salt://standardconf/linux/files/issue
-#     - mode: 644
-#     - user: root
-#     - group: root
 
-# std_ciscat_etc_issue_net_setup_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing /etc/issue.net'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_ciscat_etc_issue_net_setup
+{% for fsname in ciscat_settings.disable_filesystem| default(['na']) %}
+{% if fsname not in ciscat_settings.disable_filesystem_override| default(['ma']) %}
+std_disable_unused_filesystems_ciscat_accumulated_{{fsname}}:
+  file.accumulated:
+    - name: std_ciscat_accumulator_comment
+    - filename: /etc/modprobe.d/CISCAT.conf
+    - text: 'install {{fsname}} /bin/true'
+    - require_in:
+        - file: std_disable_unused_filesystems_deploy_modprod_d_ciscat_conf
 
-# {% endif %}
+{% endif %}
+{% endfor %}
 
-# {% if ciscat_settings.banner_net| default(True) %}
-# std_ciscat_etc_banner_net_setup:
-#   file.managed:
-#     - name: /etc/banner.net
-#     - source: salt://standardconf/linux/files/banner.net
-#     - mode: 644
-#     - user: root
-#     - group: root
+# create config file , placing the acumulator data in it
+std_disable_unused_filesystems_deploy_modprod_d_ciscat_conf:
+  file.managed:
+    - name: /etc/modprobe.d/CISCAT.conf
+    - source: salt://standardconf/linux/files/CISCAT.conf
+    - mode: 600
+    - template: jinja
 
-# std_ciscat_etc_banner_net_setup_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing /etc/banner.net'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_ciscat_etc_banner_net_setup
 
-# {% endif %}
+{% if ciscat_settings.etc_issue| default(True) %}
+std_ciscat_etc_issue_setup:
+  file.managed:
+    - name: /etc/issue
+    - source: salt://standardconf/linux/files/issue
+    - mode: 644
+    - user: root
+    - group: root
 
-# std_etc_passwd_permissions:
-#   file.managed:
-#     - name: /etc/passwd
-#     - mode: 644
-#     - user: root
-#     - group: root
+std_ciscat_etc_issue_setup_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing /etc/issue'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_ciscat_etc_issue_setup
 
-# std_etc_passwd_permissions_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing permissons on /etc/passwd 0600'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_etc_passwd_permissions
+{% endif %}
 
-# # 6.1.6 Ensure permissions on /etc/passwd- are configured
-# std_etc_passwd_dash_permissions:
-#   file.managed:
-#     - name: /etc/passwd-
-#     - mode: 600
-#     - user: root
-#     - group: root
+
+{% if ciscat_settings.etc_issue_net| default(True) %}
+std_ciscat_etc_issue_net_setup:
+  file.managed:
+    - name: /etc/issue.net
+    - source: salt://standardconf/linux/files/issue
+    - mode: 644
+    - user: root
+    - group: root
+
+std_ciscat_etc_issue_net_setup_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing /etc/issue.net'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_ciscat_etc_issue_net_setup
+
+{% endif %}
+
+{% if ciscat_settings.banner_net| default(True) %}
+std_ciscat_etc_banner_net_setup:
+  file.managed:
+    - name: /etc/banner.net
+    - source: salt://standardconf/linux/files/banner.net
+    - mode: 644
+    - user: root
+    - group: root
+
+std_ciscat_etc_banner_net_setup_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing /etc/banner.net'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_ciscat_etc_banner_net_setup
+
+{% endif %}
+
+std_etc_passwd_permissions:
+  file.managed:
+    - name: /etc/passwd
+    - mode: 644
+    - user: root
+    - group: root
+
+std_etc_passwd_permissions_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing permissons on /etc/passwd 0600'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_etc_passwd_permissions
+
+# 6.1.6 Ensure permissions on /etc/passwd- are configured
+std_etc_passwd_dash_permissions:
+  file.managed:
+    - name: /etc/passwd-
+    - mode: 600
+    - user: root
+    - group: root
     
-# std_etc_passwd_dash_permissions_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing permissons on /etc/passwd- 0600'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_etc_passwd_dash_permissions
+std_etc_passwd_dash_permissions_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing permissons on /etc/passwd- 0600'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_etc_passwd_dash_permissions
 
-# std_etc_group_permissions:
-#   file.managed:
-#     - name: /etc/group
-#     - mode: 644
-#     - user: root
-#     - group: root
+std_etc_group_permissions:
+  file.managed:
+    - name: /etc/group
+    - mode: 644
+    - user: root
+    - group: root
 
-# std_etc_group_permissions_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing permissons on /etc/group 0644'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_etc_group_permissions
+std_etc_group_permissions_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing permissons on /etc/group 0644'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_etc_group_permissions
 
-# # 6.1.8 Ensure permissions on /etc/group- are configured
-# std_etc_group_dash_permissions:
-#   file.managed:
-#     - name: /etc/group-
-#     - mode: 600
-#     - user: root
-#     - group: root
+# 6.1.8 Ensure permissions on /etc/group- are configured
+std_etc_group_dash_permissions:
+  file.managed:
+    - name: /etc/group-
+    - mode: 600
+    - user: root
+    - group: root
     
-# std_etc_group_dash_permissions_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing permissons on /etc/group- 0600'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_etc_group_dash_permissions
+std_etc_group_dash_permissions_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing permissons on /etc/group- 0600'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_etc_group_dash_permissions
 
-# std_root_bin_folder_create:
-#   file.directory:
-#     - name: /root/bin
-#     - dir_mode: 700
-#     - file_mode: 600
-#     - user: root
-#     - group: root
+std_root_bin_folder_create:
+  file.directory:
+    - name: /root/bin
+    - dir_mode: 700
+    - file_mode: 600
+    - user: root
+    - group: root
 
-# std_root_bin_folder_create_log:
-#   logfile.write:
-#     - name: {{logfile}}
-#     - data: 'changing permissons on /root/bin 0600'
-#     - state_name: '{{sls}}'
-#     - onchanges:
-#       - file: std_root_bin_folder_create
+std_root_bin_folder_create_log:
+  logfile.write:
+    - name: {{logfile}}
+    - data: 'changing permissons on /root/bin 0600'
+    - state_name: '{{sls}}'
+    - onchanges:
+      - file: std_root_bin_folder_create
 
-# {% endif %}
+{% endif %}
 
 #}
