@@ -165,9 +165,9 @@ etc_passwd_permissions:
     - user: root
     - group: root
 
-etc_passwd_permissions:
+etc_group_permissions:
   file.managed:
-    - name: /etc/passwd
+    - name: /etc/group
     - mode: 644
     - user: root
     - group: root
