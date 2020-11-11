@@ -119,3 +119,55 @@ ciscat_grub_invalidate_secure:
     - user: root
     - group: root
 {% endif -%}
+
+{# TESTED TILL HERE... #}
+
+{% if OSVERSION == 6 and ciscat_settings.configs.grub.update|default(True) -%}
+  {% for grub_setting in ciscat_settings.configs.grub.grub_settings -%}
+ciscat_settings_grub_{{ grub_setting }}:
+  file.line:
+    - name: {{ ciscat_settings.configs.grub.config_file }}
+    - match: '{{ grub_setting }}=*.'
+    - content: '{{ grub_setting }}={{ ciscat_settings.configs.grub.grub_settings[grub_setting] }}'
+    - mode: replace
+{% endfor %}
+
+ciscat_grub_post_secure:
+  file.managed:
+    - name: {{ ciscat_settings.configs.grub.config_file }}
+    - mode: 600
+    - user: root
+    - group: root
+
+{% endif %}
+
+{% for filesystem in ciscat_settings.configs.disable_fs %}
+ciscat_disable_fs_{{ filesystem }}:
+  file.accumulated:
+    - name: std_ciscat_accumulator_comment
+    - filename: /etc/modprobe.d/CISCAT.conf
+    - text: 'install {{ filesystem }} /bin/true'
+    - require_in:
+        - file: disable_unused_fs_ciscat_conf
+{% endfor %}
+
+disable_unused_fs_ciscat_conf:
+  file.managed:
+    - name: /etc/modprobe.d/ciscat.conf
+    - source: salt://ciscat/v1/files/ciscat.conf
+    - mode: 600
+    - template: jinja
+
+etc_passwd_permissions:
+  file.managed:
+    - name: /etc/passwd
+    - mode: 644
+    - user: root
+    - group: root
+
+etc_passwd_permissions:
+  file.managed:
+    - name: /etc/passwd
+    - mode: 644
+    - user: root
+    - group: root
