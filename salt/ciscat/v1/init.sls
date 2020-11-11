@@ -73,7 +73,7 @@ ciscat_crontab_perm:
 
 #5.1.2 - 5.17 Ensure permissions on /etc/cron.* folder are configured
 {% for directory in ciscat_settings.configs.cron_dirs %}
-std_ciscat_cron_permsissions_{{ directory }}:
+ciscat_cron_permsissions_{{ directory }}:
   file.directory:
     - name: {{ directory }}
     - mode: 600
@@ -145,7 +145,7 @@ ciscat_grub_post_secure:
 ciscat_disable_fs_{{ filesystem }}:
   file.accumulated:
     - name: std_ciscat_accumulator_comment
-    - filename: /etc/modprobe.d/CISCAT.conf
+    - filename: /etc/modprobe.d/ciscat.conf
     - text: 'install {{ filesystem }} /bin/true'
     - require_in:
         - file: disable_unused_fs_ciscat_conf
