@@ -34,7 +34,7 @@ Standard Configuration:
  - [x] zabbix_agent
  - [x] ds_agent
  - [] nexus_repo
- - [] cis_benchmark
+ - [x] cis_benchmark
  - [x] localusers
  - [] adjoin 
  - [] swap_space
@@ -53,3 +53,10 @@ Standard Configuration:
  - [] condition for minion installation
  - [] rsys log fine tuning
  - [] history to export rsys
+
+[] POS STD CONFIGURATION
+========
+[x] - cis_benchmark
+[] - reactor 
+[] - state enhancement
+[] - windows
