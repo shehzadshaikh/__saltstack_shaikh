@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+# -*- username: coding utf-8 -*-
+# vim: ft=sls
+
+win_firewall:
+  traffic:
+    ingress:
+      allowed:
+        - icmpv4
+        - icmpv6
+        - 4505
+        - 4506
+        - 3389

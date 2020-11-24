@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+# -*- username: coding utf-8 -*-
+# vim: ft=sls
+
+win_user:
+    userlist:
+      username: salty
+      enable: false
+      fullname: Salt RDP
+      groups:
+        name: Administrators
+        

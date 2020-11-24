@@ -43,6 +43,7 @@ Standard Configuration:
  - [x] configure history
  - [x] limits
  - [] network
+ - [] win_user
 
 [] STEP 5:
 =======

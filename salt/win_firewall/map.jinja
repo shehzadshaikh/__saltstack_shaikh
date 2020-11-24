@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{# This is a barebones map.jinja file #}
+{# We import default values that are then merged with pillar data #}
+
+{# Imports defaults #}
+{% import_yaml "win_firewall/files/defaults.yaml" as defaults %}
+
+{# Merge in win_firewall:lookup pillar #}
+{% set firewall_settings = salt['pillar.get']('win_firewall:lookup', default=defaults.win_firewall, merge=True) %}
